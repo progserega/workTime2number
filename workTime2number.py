@@ -5,6 +5,10 @@ import time
 import datetime
 import os
 import csv
+import locale
+
+#locale.setlocale(locale.LC_ALL, "ru_RU")
+locale.setlocale(locale.LC_ALL, "")
 
 if len(sys.argv)<2:
   print("нужен один параметр - имя входного файла csv. Выход будет в файл с постфиксом _converted.csv и на экран")
@@ -20,6 +24,6 @@ with open(sys.argv[1], newline='\n') as csvfile:
     # переводим время в дробноче число часа:
     t = row['spent'].split(':')
     hours = float(int(t[0])*60+int(t[1]))/60
-    print("%s;%f"%(row['day'],hours))
-    out_file.write("%s;%f\n"%(row['day'],hours))
+    print("%s;%s"%(row['day'],locale.str(hours)))
+    out_file.write("%s;%s\n"%(row['day'],locale.str(hours)))
   out_file.close()
