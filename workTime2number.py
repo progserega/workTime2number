@@ -18,12 +18,12 @@ with open(sys.argv[1], newline='\n') as csvfile:
 
   # создаём файл:
   out_file = open("%s_converted.csv"%sys.argv[1],"w+")
-  print("Дата;Время работы")
-  out_file.write("Дата;Время работы\n")
+  print("Дата;Время работы;Задача")
+  out_file.write("Дата;Время работы;Задача\n")
   for row in data:
     # переводим время в дробноче число часа:
     t = row['spent'].split(':')
     hours = float(int(t[0])*60+int(t[1]))/60
-    print("%s;%s"%(row['day'],locale.str(hours)))
-    out_file.write("%s;%s\n"%(row['day'],locale.str(hours)))
+    print("%s;%s;%s"%(row['day'],locale.str(hours),row['task']))
+    out_file.write("%s;%s;%s\n"%(row['day'],locale.str(hours),row['task']))
   out_file.close()
